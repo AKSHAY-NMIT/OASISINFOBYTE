@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+#include<stdexcept>
+using namespace std;
+//user defined exception class for negative number  for divide by zero
+class Exception 
+{
+	public:
+		const char* what() const
+			{
+				return"math error : attempted to divide by zero";
+			}
+			
+};
+//user defined exception class for negative number  for divide by negative number
+class Exception1 
+{
+	public:
+		const char* what() const
+			{
+				return"math error : attempted to perform divison using negative number";
+			}
+			
+};
+
+//function to perform division
+float division(float numerator ,float den)
+{
+if(den==0)
+	{
+		throw Exception();
+	}
+else if(den<0 || numerator<0)
+	{
+		throw Exception1();
+	}
+return static_cast<float>(numerator/den);
+
+}
+
+int main()
+{
+	float num,den,res;
+	cout<<"enter the numerator and denominator\n";
+	cin>>num>>den;
+	//try block to run the division function
+	try
+		{
+			res=division(num,den);
+			cout<<"the quotient is: "<<res<<endl;
+		}
+	//catch block for divide by zero exception
+	catch(const Exception& e)
+		{
+			cout<<"exception occured"<<endl<<e.what()<<endl;
+		}
+	//catch block for divide by negative number  exception	
+	catch(const Exception1& a)
+		{
+			cout<<"exception occured"<<endl<<a.what()<<endl;
+		}
+}
+						
